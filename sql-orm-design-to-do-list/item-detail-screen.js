@@ -50,7 +50,7 @@ class ItemDetailScreen {
       console.log("Type \"C\" and hit \"Enter\" to complete this");
       console.log("task and return to the list screen. Just");
       console.log("hit \"Enter\" to return to the list screen.");
-      this.rl.question("> ", answer => {
+      this.rl.question("> ", async answer => {
         if (answer === "C") {
 
           // TODO: Update the item so that its complete

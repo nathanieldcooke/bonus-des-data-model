@@ -1,5 +1,7 @@
 // TODO: import your models here
 
+const {Category, Item} = require('./models');
+
 class AddItemScreen {
   constructor(rl) {
     this.rl = rl;
@@ -56,7 +58,11 @@ class AddItemScreen {
     console.log();
 
     // TODO: Get categories, here
+    const cats = await Category.findAll();
+
+
     // TODO: Print categories, here, with ids so users can select them
+    cats.forEach(cat => console.log(`${cat.id} ${cat.name}`))
 
     console.log();
   }
@@ -70,7 +76,12 @@ class AddItemScreen {
     console.log(`TITLE: ${title}`);
 
     // TODO: Get the category by its id
+    const cat = await Category.findByPk(categoryId);
+
+
     // TODO: Print it here
+    console.log(`${cat.id} ${cat.name}`)
+
 
     console.log();
     console.log("(Type your text and hit \"Enter\" to return to");
@@ -88,6 +99,13 @@ class AddItemScreen {
         this.rl.question("> ", async answer => {
 
           // TODO: Save a Note, here
+          await Item.create({
+            text: answer,
+            completed: false,
+            type: 'Note',
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+          })
 
           const screen = new ManageTasksScreen(this.rl);
           screen.show();
@@ -97,12 +115,18 @@ class AddItemScreen {
         this.rl.question("> ", async title => {
           await this.printTaskUi2(title);
           this.rl.question("> ", async categoryId => {
-            categoryId = Number.parseInt(categoryId) - 1;
+            categoryId = Number.parseInt(categoryId);
             await this.printTaskUi3(title, categoryId);
             this.rl.question("> ", async description => {
 
               // TODO: Save a task, here with title, categoryId, and description
-
+              await Item.create({
+                text: description,
+                completed: false,
+                type: 'Task',
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+              })
               const screen = new ManageTasksScreen(this.rl);
               screen.show();
             });
