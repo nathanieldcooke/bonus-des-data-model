@@ -38,7 +38,7 @@ class ManageCategoriesScreen {
       if (answer === 'X') {
         new MainScreen(this.rl).show();
       } else {
-        const index = Number.parseInt(answer) - 1;
+        const index = Number.parseInt(answer);
 
         new EditCategoryScreen(this.rl, index).show();
       }
