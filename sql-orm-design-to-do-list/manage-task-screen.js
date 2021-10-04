@@ -1,20 +1,35 @@
 // TODO: Import your models, here
 
+const { Category, Item, Sequelize: {Op} } = require('./models')
+
 class ManageTasksScreen {
   constructor(rl) {
-    this.rl = rl;
+    this.rl = rl
     this.index = 0;
   }
-
+  
   async printUi() {
     console.clear();
     console.log("********************************************");
     console.log("* TO-DO ITEMS                   (c) 1987   *");
     console.log("********************************************");
     console.log();
-
+    
     // TODO: query your to do items, tasks and notes, here, only ones that are
+    const itemsToDo = await Item.findAll({
+      where: {
+        completed: {
+          [Op.not]: true
+        }
+      }
+    })
     //       NOT completed TODO: print out items here
+
+    itemsToDo.forEach(item => {
+      console.log(`${item.id}: ${item.text}`)
+    })
+
+    // this.rl = rl;
 
     console.log();
     console.log("A. Add a new item");

@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       // references: { model: 'Categories' }
     },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    type: DataTypes.STRING,
   }, {});
   Item.associate = function(models) {
     // associations can be defined here

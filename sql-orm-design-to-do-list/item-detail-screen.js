@@ -1,4 +1,5 @@
 // TODO: import your models, here
+const { Category, Item } = require('./models')
 
 class ItemDetailScreen {
   constructor(rl, detailId) {
@@ -14,6 +15,9 @@ class ItemDetailScreen {
     console.log();
 
     // TODO: Display the item, here
+    console.log(item.text)
+
+
 
     console.log();
   }
@@ -26,12 +30,16 @@ class ItemDetailScreen {
     console.log();
 
     // TODO: Display the item, here
+    console.log(item.text)
+
 
     console.log();
   }
 
   async show() {
     // TODO: Get the item from the database, task or note
+    const item = await Item.findByPk(this.detailId)
+    
 
     if (item) {
       if (item.type === 'Note') {
@@ -47,6 +55,7 @@ class ItemDetailScreen {
 
           // TODO: Update the item so that its complete
           // TODO: Save the item
+          await item.update({completed: true})
 
         }
         const screen = new ManageTasksScreen(this.rl);
@@ -62,4 +71,5 @@ class ItemDetailScreen {
 exports.ItemDetailScreen = ItemDetailScreen;
 
 // Requires at bottom to prevent circular dependencies problems in node
-const { ManageTasksScreen } = require('./manage-task-screen');
+const { ManageTasksScreen } = require('./manage-task-screen');const item = require('./models/item');
+
