@@ -15,6 +15,8 @@ class ManageCategoriesScreen {
     // TODO: Get the categories
     // TODO: Print the categories with their ids so a user can select one
 
+    
+
     console.log();
     console.log("X. Go to main screen");
     console.log();
@@ -29,6 +31,7 @@ class ManageCategoriesScreen {
         new MainScreen(this.rl).show();
       } else {
         const index = Number.parseInt(answer) - 1;
+
         new EditCategoryScreen(this.rl, index).show();
       }
     });
